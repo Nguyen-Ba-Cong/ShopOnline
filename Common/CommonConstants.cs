@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Common
+{
+    public class CommonConstants
+    {
+        public static String ADMIN_GROUP = "ADMIN";
+        public static String MEMBER_GROUP = "MEMBER";
+        public static String MOD_GROUP = "MOD";
+    }
+}

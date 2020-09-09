@@ -1,0 +1,43 @@
+﻿@model List<Model.EF.ProductCategory>
+<script type="text/javascript" src="/Assets/Client/js/jquery-1.11.1.min.js"></script>
+<script src="/Assets/Client/js/responsiveslides.min.js"></script>
+<script type="text/javascript" src="/Assets/Client/js/hover_pack.js"></script>
+<div class="sidebar">
+    <div class="menu_box">
+        <h3 class="menu_head">Products Menu</h3>
+        <ul class="menu">
+            @foreach (var item in Model.Where(x => x.ParentID == null))
+            {
+                var child = Model.Where(x => x.ParentID == item.ID);             
+                <li class="item1">
+                    <a href="/san-pham/@item.MetaTitle-@item.ID"><img class="arrow-img" src="/Assets/Client/images/f_menu.png" alt="" />@item.Name</a>
+                    <ul class="cute">
+                        @foreach (var i in child)
+                        {
+                            <li class="subitem1"><a href="/san-pham/@i.MetaTitle-@i.ID">@i.Name</a></li>
+                        }                      
+                    </ul>
+                </li>
+            }
+        </ul>
+        <script type="text/javascript">
+            $(function () {
+                var menu_ul = $('.menu > li > ul'),
+                    menu_a = $('.menu > li > a');
+                menu_ul.hide();
+                menu_a.click(function (e) {
+                    e.preventDefault();
+                    if (!$(this).hasClass('active')) {
+                        menu_a.removeClass('active');
+                        menu_ul.filter(':visible').slideUp('normal');
+                        $(this).addClass('active').next().stop(true, true).slideDown('normal');
+                    } else {
+                        $(this).removeClass('active');
+                        $(this).next().stop(true, true).slideUp('normal');
+                    }
+                });
+
+            });
+        </script>
+    </div>
+</div>

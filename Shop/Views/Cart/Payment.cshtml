@@ -1,0 +1,101 @@
+﻿@model List<Shop.Models.CartItem>
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="col-md-3 sidebar_box">
+        @{ Html.RenderAction("ProductCategory", "Product");}
+        <div class="delivery">
+            <img src="/Assets/Client/images/delivery.jpg" class="img-responsive" alt="" />
+            <h3>Delivering</h3>
+            <h4>World Wide</h4>
+        </div>
+        <div class="twitter">
+            <h3>Latest From Twitter</h3>
+            <ul class="twt1">
+                <i class="twt"> </i>
+                <div class="clearfix"> </div>
+            </ul>
+            <ul class="twt1">
+                <i class="twt"> </i>
+                <li class="twt1_desc"><span class="m_1">There are many</span> variations of passages of Lorem Ipsum available, but the majority <span class="m_1">have suffered</span></li>
+                <div class="clearfix"> </div>
+            </ul>
+            <ul class="twt1">
+                <i class="twt"> </i>
+                <li class="twt1_desc"><span class="m_1">Lorem Ipsum</span> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has <span class="m_1">been the industry's standard dummy text ever</span></li>
+                <div class="clearfix"> </div>
+            </ul>
+        </div>
+        <div class="clients">
+            <h3>Our Happy Clients</h3>
+            <h4>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae.</h4>
+            <ul class="user">
+                <i class="user_icon"></i>
+                <li class="user_desc"><a href="#"><p>John Doe, Company Info</p></a></li>
+                <div class="clearfix"> </div>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-9 content_right">
+        <h4 class="head"><span class="m_2">Payment</span></h4>
+        @if (Model.Count() > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Mã Số</td>
+                        <td>Tên</td>
+                        <td>Số Lượng</td>
+                        <td>Minh Họa</td>
+                        <td>Giá</td>
+                        <td>Thành Tiền</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Product.ID</td>
+                            <td>@item.Product.Name</td>
+                            <td><input type="text" class="txtQuantity" data-id="@item.Product.ID" value="@item.Quantity" /></td>
+                            <td><img src="@item.Product.Image" width="100" /></td>
+                            <td>@item.Product.Price.GetValueOrDefault(0)</td>
+                            <td>@(item.Product.Price.GetValueOrDefault(0) * item.Quantity)</td>
+                            <td><a href="#" data-id="@item.Product.ID" class="btn-delete">Delete</a></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        }
+    <div class="section group">
+        @using (Html.BeginForm("Payment", "Cart", FormMethod.Post))
+        {
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>User Name</label>
+                <input type="text" name="ShipName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" name="Mobile" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Adress</label>
+                <input type="text" name="Address" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" name="Email" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-success">OK</button>
+        </div>
+        }
+    </div>
+    </div>
+</div>
+

@@ -1,0 +1,96 @@
+﻿@model  Model.EF.Contact
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #mapCanvas {
+        height: 400px;
+    }
+</style>
+@section jsFooter
+{
+    <script src="~/Assets/Client/js/Controller/ContactController.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+
+
+    <script>
+        function initMap() {
+            const uluru = { lat: 16.003549, lng: 108.147349 };
+            const map = new google.maps.Map(document.getElementById('mapCanvas'), {
+                zoom: 15,
+                center: uluru
+            });
+            const contentString =
+                '<div id="content">' +
+                '<div id="siteNotice">' +
+                "</div>" +
+                '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
+                '<div id="bodyContent">' +
+                "<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large " +
+                "sandstone rock formation in the southern part of the " +
+                "Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) " +
+                "south west of the nearest large town, Alice Springs; 450&#160;km " +
+                "(280&#160;mi) by road. Kata Tjuta and Uluru are the two major " +
+                "features of the Uluru - Kata Tjuta National Park. Uluru is " +
+                "sacred to the Pitjantjatjara and Yankunytjatjara, the " +
+                "Aboriginal people of the area. It has many springs, waterholes, " +
+                "rock caves and ancient paintings. Uluru is listed as a World " +
+                "Heritage Site.</p>" +
+                '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
+                "https://en.wikipedia.org/w/index.php?title=Uluru</a> " +
+                "(last visited June 22, 2009).</p>" +
+                "</div>" +
+                "</div>";
+
+            const infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+            const marker = new google.maps.Marker({
+                position: uluru,
+                map,
+                title: "Address"
+            });
+            marker.addListener("click", () => {
+                infowindow.open(map, marker);
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
+
+}
+<div class="about">
+    <div class="container">
+        <div class="singel_right">
+            <div class="col-md-8">
+                <div class="contact-form">
+                    <form>
+                        <p class="comment-form-author">
+                            <label for="author">Your Name:</label>
+                            <input type="text" class="textbox" id="txtName">
+                        </p>
+                        <p class="comment-form-author">
+                            <label for="author">Email:</label>
+                            <input type="text" class="textbox" id="txtEmail">
+                        </p>
+                        <p class="comment-form-author">
+                            <label for="author">Message:</label>
+                            <textarea id="txtContent"></textarea>
+                        </p>
+                        <button class="btn btn-success" id="btnSend">Send</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4 contact_right">
+                @Html.Raw(Model.Content);
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="map" id="mapCanvas">
+
+        </div>
+    </div>
+</div>
+

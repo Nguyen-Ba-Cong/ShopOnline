@@ -1,0 +1,32 @@
+﻿@model List<Model.EF.Menu>
+<div class="header_top">
+    <div class="container">
+        <div class="logo">
+            <a href="index.html"><img src="/Assets/Client/images/logo.png" alt="" /></a>
+        </div>
+        @{
+            var session = (Shop.Common.UserLogin)Session[Shop.Common.CommonConstant.UserSession];
+        }
+        @if (session == null)
+        {
+            <ul class="shopping_grid">
+                @foreach (var item in Model)
+                {
+                    <a href="@item.Link" target=""><li>@item.Text</li></a>
+                }
+
+                <div class="clearfix"> </div>
+            </ul>
+        }
+        else
+        {
+            <ul class="shopping_grid">
+                <a href="#"><li>Hello: @session.UserName</li></a>
+                @{ Html.RenderAction("HeaderCart", "Home");}
+                <a href="#"><li>@Html.ActionLink("LogOut", "Logout", "User")</li></a>
+                <div class="clearfix"> </div>
+            </ul>
+        }
+        <div class="clearfix"> </div>
+    </div>
+</div>

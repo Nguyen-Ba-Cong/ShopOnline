@@ -1,0 +1,14 @@
+﻿@model List<Model.EF.Menu>
+    <div class="h_menu4">
+        <!-- start h_menu4 -->
+        <div class="container">
+            <a class="toggleMenu" href="#">Menu</a>
+            <ul class="nav">
+                @foreach (var item in Model)
+                {
+                    <li><a href="@item.Link" target="">@item.Text</a></li>
+                }
+            </ul>
+            <script type="text/javascript" src="/Assets/Client/js/nav.js"></script>
+        </div><!-- end h_menu4 -->
+    </div>

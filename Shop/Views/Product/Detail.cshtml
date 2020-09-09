@@ -1,0 +1,128 @@
+﻿@model Model.EF.Product
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var category = (Model.EF.ProductCategory)ViewBag.Category;
+    var related = (List<Model.EF.Product>)ViewBag.RelatedProduct;
+}
+<div class="main">
+    <div class="content_top">
+        <div class="container">
+            <div class="col-md-3 sidebar_box">
+                @{ Html.RenderAction("ProductCategory", "Product");}
+                <div class="delivery">
+                    <img src="/Assets/Client/images/delivery.jpg" class="img-responsive" alt="" />
+                    <h3>Delivering</h3>
+                    <h4>World Wide</h4>
+                </div>
+                <div class="twitter">
+                    <h3>Latest From Twitter</h3>
+                    <ul class="twt1">
+                        <i class="twt"> </i>
+                        <li class="twt1_desc"><span class="m_1">There are many</span> variations of passages of Lorem Ipsum available, but the majority <span class="m_1">have suffered</span></li>
+                        <div class="clearfix"> </div>
+                    </ul>
+                    <ul class="twt1">
+                        <i class="twt"> </i>
+                        <li class="twt1_desc"><span class="m_1">Lorem Ipsum</span> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has <span class="m_1">been the industry's standard dummy text ever</span></li>
+                        <div class="clearfix"> </div>
+                    </ul>
+                </div>
+                <div class="clients">
+                    <h3>Our Happy Clients</h3>
+                    <h4>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae.</h4>
+                    <ul class="user">
+                        <i class="user_icon"></i>
+                        <li class="user_desc"><a href="#"><p>John Doe, Company Info</p></a></li>
+                        <div class="clearfix"> </div>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9 single_right">
+                <div class="single_top">
+                    <div class="single_grid">
+                        <div class="grid images_3_of_2">
+                            <ul id="etalage">
+                                <li>
+                                    <a href="#">
+
+                                        <img class="etalage_source_image" src="@Model.Image" class="img-responsive" title="" />
+                                    </a>
+                                </li>
+
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="desc1 span_3_of_2">
+                            <h1> @Model.Name</h1>
+                            <p class="availability">Availability: <span class="color">In stock</span></p>
+                            <div class="price_single">
+                                <span>@Model.Price</span>
+                            </div>
+                            <h2 class="quick">Quick Overview:</h2>
+                            <p class="quick_desc">@Model.Description</p>
+                            <div class="wish-list">
+                                <ul>
+                                    <li class="wish"><a href="#">Add to Wishlist</a></li>
+                                    <li class="compare"><a href="#">Add to Compare</a></li>
+                                </ul>
+                            </div>
+                            <div class="quantity_box">                            
+                                <ul class="single_social">
+                                    <li><a href="#"><i class="fb1"> </i> </a></li>
+                                    <li><a href="#"><i class="tw1"> </i> </a></li>
+                                    <li><a href="#"><i class="g1"> </i> </a></li>
+                                    <li><a href="#"><i class="linked"> </i> </a></li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <a href="/them-gio-hang?productId=@Model.ID&quantity=1" title="Online Reservation" class="btn bt1 btn-primary btn-normal btn-inline " id="btnAddtoCart" target="_self">Add to cart</a>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="sap_tabs">
+                    <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+                        <ul class="resp-tabs-list">
+                            <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Product Description</span></li>
+                            <div class="clear"></div>
+                        </ul>
+                        <div class="resp-tabs-container">
+                            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
+                                <div class="facts">
+                                    @Html.Raw(Model.Detail)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="single_head">Related Products</h3>
+                <div class="related_products">
+                    @foreach (var item in related)
+                    {
+                        var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                        <div class="col-md-4 top_grid1-box1 top_grid2-box2">
+                            <a href="@url">
+                                <div class="grid_1">
+                                    <div class="b-link-stroke b-animate-go  thickbox">
+                                        <img src="@item.Image" class="img-responsive" alt="" />
+                                    </div>
+                                    <div class="grid_2">
+                                        <p>There are many variations of passages</p>
+                                        <ul class="grid_2-bottom">
+                                            <li class="grid_2-left"><p>@item.Price</p></li>
+                                            <li class="grid_2-right"><a href="single.html" title="Get It" class="btn btn-primary btn-normal btn-inline " target="_self">Get It</a></li>
+                                            <div class="clearfix"> </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
