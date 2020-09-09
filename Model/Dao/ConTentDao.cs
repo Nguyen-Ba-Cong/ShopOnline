@@ -24,5 +24,10 @@ namespace Model.Dao
         {
             return db.ConTents.Find(id);
         }
+         public IEnumerable<ConTent> ListAll( int page, int pageSize)
+        {
+            IQueryable<ConTent> model = db.ConTents;
+            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+        }
     }
 }

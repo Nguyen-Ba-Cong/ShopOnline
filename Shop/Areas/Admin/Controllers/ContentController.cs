@@ -10,9 +10,11 @@ namespace Shop.Areas.Admin.Controllers
     public class ContentController : BaseController
     {
         // GET: Admin/Content
-        public ActionResult Index()
+         public ActionResult Index(int page=1, int pagesize=2)
         {
-            return View();
+            var dao = new ConTentDao();
+            var model = dao.ListAll(page, pagesize);
+            return View(model);
         }
         [HttpGet]
         public ActionResult Create()
